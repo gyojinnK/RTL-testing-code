@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Options from "../Options";
 
-test("서바가 반환한 이미지를 표시한다.", async () => {
+test("서버가 반환한 scoop 이미지를 표시한다.", async () => {
   render(<Options optionType="scoops" />);
 
   // 이미지 찾기
@@ -16,4 +16,18 @@ test("서바가 반환한 이미지를 표시한다.", async () => {
   const altText = scoopImages.map((element) => element.alt);
   // 배열이나 객체는 .toBe가 아닌 .toEqual로 비교
   expect(altText).toEqual(["Chocolate scoop", "Vanilla scoop"]);
+});
+
+test("서버가 반환한 topping 이미지를 표시한다.", async () => {
+  render(<Options optionType="topping" />);
+
+  const toppingImages = await screen.findAllByRole("img", {
+    name: /topping$/i,
+  });
+  const altText = toppingImages.map((element) => element.alt);
+  expect(altText).toEqual([
+    "Cherries topping",
+    "M&Ms topping",
+    "Hot fudge topping",
+  ]);
 });
