@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import useEvent, { userEvent } from "@testing-library/user-event";
+import { render, screen } from "../../../test-utils/testing-library-utils";
+import { userEvent } from "@testing-library/user-event";
 import Options from "../Options";
 
 test("scoop 변경 시 금액 총합 업데이트", async () => {
@@ -21,11 +21,11 @@ test("scoop 변경 시 금액 총합 업데이트", async () => {
   expect(scoopSubtotal).toHaveTextContent("2.00");
 
   // 초콜릿 scoop을 2개로 업데이트하고 총금액을 확인한다.
-  const chocolateSubtotal = screen.findByRole("spinbutton", {
+  const chocolateInput = await screen.findByRole("spinbutton", {
     name: "Chocolate",
   });
 
-  await user.clear(chocolateSubtotal);
-  await user.type(chocolateSubtotal, "2");
+  await user.clear(chocolateInput);
+  await user.type(chocolateInput, "2");
   expect(scoopSubtotal).toHaveTextContent("6.00");
 });

@@ -2,7 +2,7 @@
 import { http, HttpResponse } from "msw";
 import { server } from "../../../mocks/server";
 
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import OrderEntry from "../OrderEntry";
 
 // 실제 데이터 요청이 이루어지는 함수를 오버라이딩하여
